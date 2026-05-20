@@ -45,7 +45,7 @@ def load_csv(file, encodings=["utf-8", "cp1251", "iso-8859-1"]):
     return None, None, None
 
 
-# Функция для определения типа столбца (ЕДИНАЯ ВЕРСИЯ)
+# Функция для определения типа столбца
 def get_column_type(series):
     # Сначала проверяем на числовой тип
     try:
@@ -56,7 +56,7 @@ def get_column_type(series):
     except:
         pass
 
-    # Проверяем на дату (только если есть признаки даты)
+    # Проверяем на дату
     try:
         sample = series.dropna().head(10)
         if len(sample) > 0:
@@ -77,7 +77,7 @@ def get_column_type(series):
     return "text"
 
 
-# Функция для статистического анализа (теперь принимает col_type)
+# Функция для статистического анализа
 @st.cache_data
 def calculate_statistics(df, column, col_type):
     if col_type == "numeric":
@@ -124,7 +124,7 @@ def calculate_statistics(df, column, col_type):
     return stats
 
 
-# Функция для безопасного преобразования в числовой тип
+# Функция для преобразования в числовой тип
 def safe_numeric(series):
     return pd.to_numeric(series, errors='coerce')
 
